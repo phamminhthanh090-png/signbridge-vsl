@@ -1,0 +1,89 @@
+{
+ "default_subject": "tôi",
+ "subject": [
+  "tôi",
+  "em",
+  "con",
+  "cháu",
+  "mình",
+  "anh",
+  "chị",
+  "chúng tôi"
+ ],
+ "symptom": [
+  "đau đầu",
+  "đau bụng",
+  "đau răng",
+  "đau họng",
+  "đau tai",
+  "đau mắt",
+  "đau chân",
+  "đau tay",
+  "đau ngực",
+  "đau lưng",
+  "sốt",
+  "ho",
+  "chóng mặt",
+  "buồn nôn",
+  "mệt",
+  "khó thở"
+ ],
+ "meet": [
+  "bác sĩ",
+  "y tá",
+  "cô giáo",
+  "thầy giáo",
+  "giáo viên",
+  "công an",
+  "bố",
+  "mẹ",
+  "ba",
+  "má"
+ ],
+ "food": [
+  "cơm",
+  "phở",
+  "bún",
+  "bánh",
+  "cháo",
+  "trái cây",
+  "rau"
+ ],
+ "drink": [
+  "nước",
+  "sữa",
+  "trà",
+  "cà phê"
+ ],
+ "need": [
+  "thuốc",
+  "giúp đỡ",
+  "tiền",
+  "sách",
+  "bút",
+  "điện thoại"
+ ],
+ "place": [
+  "nhà vệ sinh",
+  "bệnh viện",
+  "trường học",
+  "về nhà"
+ ],
+ "templates": {
+  "symptom": "{s} bị {w}",
+  "meet": "{s} cần gặp {w}",
+  "food": "{s} muốn ăn {w}",
+  "drink": "{s} muốn uống {w}",
+  "need": "{s} cần {w}",
+  "place": "{s} muốn đi {w}"
+ },
+ "phrases": {
+  "tôi|đau đầu|bác sĩ": {
+   "vi": "Tôi bị đau đầu, tôi cần gặp bác sĩ",
+   "en": "I have a headache and I need to see a doctor",
+   "zh": "我头疼，我需要看医生",
+   "ko": "머리가 아파요. 의사를 만나야 해요",
+   "ja": "頭が痛いです。医者に診てもらいたいです"
+  }
+ }
+}

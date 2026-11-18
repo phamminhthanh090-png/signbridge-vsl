@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0b1220">
+<title>SignBridge</title>
+<style>
+:root{--bg:#0b1220;--card:#131c2f;--line:#25324d;--tx:#e8eefc;--mut:#8fa0c4;--ac:#4f8cff;--ac2:#8b5cf6;--ok:#2fbf71;--warn:#f5a524;--bad:#ef4444}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;padding:0 16px 40px;max-width:760px;margin-inline:auto}
+h1{font-size:20px;margin:16px 0 2px}
+.sub{color:var(--mut);font-size:13px;margin:0 0 12px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px;margin-bottom:12px}
+.cam{position:relative;border-radius:12px;overflow:hidden;background:#000;aspect-ratio:4/3}
+video{width:100%;height:100%;object-fit:cover;transform:scaleX(-1)}
+.rec{position:absolute;top:8px;left:8px;background:#000a;color:#fff;border-radius:20px;padding:3px 10px;font-size:12px;display:none}
+.rec.on{display:block;color:#ff6b6b}
+.hint{position:absolute;left:8px;right:8px;bottom:8px;background:#000b;color:#ffd27a;border-radius:8px;padding:6px 8px;font-size:13px;display:none}
+button{font:inherit;color:#fff;background:linear-gradient(135deg,var(--ac),var(--ac2));border:0;border-radius:10px;padding:10px 14px;cursor:pointer}
+button.sec{background:#1d2a45;border:1px solid var(--line)}
+button:disabled{opacity:.5}
+.row{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.row>*{flex:1 1 auto}
+.stat{font-size:13px;color:var(--mut);margin-top:8px;min-height:18px}
+.chips{display:flex;gap:6px;flex-wrap:wrap;min-height:30px;margin-top:6px}
+.chip{background:#1d2a45;border:1px solid var(--line);border-radius:20px;padding:3px 10px;font-size:14px}
+.bar{height:5px;border-radius:5px;background:#1d2a45;margin-top:8px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--ac);transition:width .2s}
+.big{font-size:26px;line-height:1.3;font-weight:600;min-height:40px;word-break:break-word}
+.lab{font-size:12px;color:var(--mut);text-transform:uppercase;letter-spacing:.04em}
+.chat{max-height:260px;overflow:auto;display:flex;flex-direction:column;gap:6px;margin-top:8px}
+.msg{padding:8px 11px;border-radius:12px;font-size:15px;max-width:88%}
+.msg.sign{background:#1d3a66;align-self:flex-start}
+.msg.voice{background:#2b2a55;align-self:flex-end}
+.msg.int{opacity:.6;font-style:italic}
+input[type=text]{width:100%;font:inherit;color:var(--tx);background:#0e1626;border:1px solid var(--line);border-radius:10px;padding:10px}
+iframe{width:100%;height:560px;border:0;border-radius:12px;background:#000;margin-top:8px}
+.dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--warn);margin-right:6px}
+.dot.ok{background:var(--ok)}.dot.bad{background:var(--bad)}
+</style>
+</head>
+<body>
+<h1>🤟 SignBridge</h1>
+<p class="sub">Dịch ngôn ngữ ký hiệu Việt Nam &harr; giọng nói. Đặt camera thấy rõ <b>hai vai và hai tay</b>.</p>
+
+<div class="card">
+  <div class="cam"><video id="v" playsinline muted autoplay></video><div class="rec" id="rec">● REC</div><div class="hint" id="hint"></div></div>
+  <div class="row">
+    <button id="bStart">📷 Bật camera và bắt đầu</button>
+    <button id="bFlip" class="sec" style="display:none">🔄 Đổi camera</button>
+  </div>
+  <div class="row">
+    <button id="bClear" class="sec">🧹 Xóa câu</button>
+    <button id="bPause" class="sec">⏸ Tạm dừng</button>
+  </div>
+  <div class="stat" id="stat"><span class="dot"></span>Chưa kết nối.</div>
+  <div class="stat" id="fps"></div>
+  <div class="chips" id="chips"></div>
+  <div class="bar"><i id="barI"></i></div>
+</div>
+
+<div class="card">
+  <div class="lab">🗣️ Câu hoàn chỉnh (từ ký hiệu)</div>
+  <div class="big" id="big">…</div>
+  <div class="row">
+    <button id="bSpeak" class="sec">🔊 Đọc lại</button>
+    <button id="bAuto" class="sec">Tự đọc: BẬT</button>
+  </div>
+</div>
+
+<div class="card">
+  <div class="lab">💬 Trò chuyện hai chiều</div>
+  <div class="row"><button id="bMic" class="sec">🎙️ Bật mic nghe người nói (tiếng Việt)</button></div>
+  <div class="stat" id="micStat">Người bình thường nói, chữ hiện ở đây và ký hiệu hiện ở khung bên dưới.</div>
+  <div class="chat" id="chat"></div>
+</div>
+
+<div class="card">
+  <div class="lab">👐 Xem ký hiệu</div>
+  <input id="typed" type="text" placeholder="Gõ chữ rồi bấm Enter, ví dụ: chào bạn" enterkeyhint="go">
+  <iframe id="av" title="Ký hiệu" style="display:none"></iframe>
+</div>
+
+<canvas id="cv" style="display:none"></canvas>
+<script>
+const $=id=>document.getElementById(id);
+let ws=null, stream=null, facing="user", timer=null, auto=true, lastSentence="", paused=false;
+
+function setStat(txt,cls){$("stat").innerHTML='<span class="dot '+(cls||'')+'"></span>'+txt}
+function addMsg(kind,text,interim){
+  const c=$("chat");let el=interim?c.querySelector(".int"):null;
+  if(!el){el=document.createElement("div");el.className="msg "+kind+(interim?" int":"");c.appendChild(el)}
+  el.className="msg "+kind+(interim?" int":"");el.textContent=text;c.scrollTop=c.scrollHeight;return el}
+function speak(t){
+  if(!t||!window.speechSynthesis)return;
+  speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang="vi-VN";
+  const vs=speechSynthesis.getVoices().find(v=>v.lang&&v.lang.toLowerCase().startsWith("vi"));if(vs)u.voice=vs;
+  speechSynthesis.speak(u)}
+function showAvatar(t){
+  t=(t||"").trim();if(!t)return;const f=$("av");f.style.display="block";f.src="/avatar?text="+encodeURIComponent(t)}
+
+function connect(){
+  const proto=location.protocol==="https:"?"wss":"ws";
+  ws=new WebSocket(proto+"://"+location.host+"/ws");ws.binaryType="arraybuffer";
+  ws.onopen=()=>setStat("Đã kết nối máy chủ. Đang nạp bộ nhận diện…","");
+  ws.onclose=()=>{setStat("Mất kết nối. Đang thử lại…","bad");setTimeout(()=>{if(stream)connect()},1500)};
+  ws.onmessage=e=>{
+    const m=JSON.parse(e.data);
+    if(m.t==="busy"){setStat("Máy chủ đang bận (đủ người dùng). Thử lại sau ít phút.","bad");stop();return}
+    if(m.t==="st"){
+      $("rec").classList.toggle("on",m.rec);
+      $("chips").innerHTML=m.words.map(w=>'<span class="chip">'+w.replace(/</g,"&lt;")+'</span>').join("");
+      $("barI").style.width=(m.left==null?0:Math.round(100*m.left/2.5))+"%";
+      if(!m.ready)setStat(m.err||"Đang nạp bộ nhận diện (lần đầu có thể mất vài phút)…","");
+      else setStat(m.paused?"Đã tạm dừng.":(m.busy?"Đang ghép câu…":(m.rec?"Đang nhận ký hiệu…":"Sẵn sàng. Hãy đưa tay ra làm ký hiệu rồi hạ tay xuống.")),m.paused?"":"ok");
+      $("fps").textContent=m.fps?("⚡ Tốc độ xử lý: "+m.fps+" khung/giây"+(m.fps<22?" (thấp: dịch có thể kém chính xác hơn, hãy dùng mạng tốt hơn)":" (tốt)")):"";
+      $("bPause").textContent=m.paused?"▶ Tiếp tục":"⏸ Tạm dừng"}
+    else if(m.t==="word"){}
+    else if(m.t==="skip"){}
+    else if(m.t==="sentence"){lastSentence=m.text;$("big").textContent=m.text;addMsg("sign","🤟 "+m.text);if(auto)speak(m.text)}
+    else if(m.t==="hint"){const h=$("hint");h.textContent=m.text;h.style.display="block";setTimeout(()=>h.style.display="none",4000)}}
+}
+async function startCam(){
+  try{
+    if(stream)stream.getTracks().forEach(t=>t.stop());
+    stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:facing,width:{ideal:640},height:{ideal:480}},audio:false});
+  }catch(err){setStat("Không mở được camera: "+err.message+". Hãy cho phép camera cho trang này.","bad");return false}
+  const v=$("v");v.srcObject=stream;v.style.transform=facing==="user"?"scaleX(-1)":"none";
+  await v.play().catch(()=>{});return true}
+function loop(){
+  const v=$("v"),cv=$("cv");if(!v.videoWidth||!ws||ws.readyState!==1)return;
+  if(ws.bufferedAmount>120000)return;
+  const L=400,r=Math.min(1,L/Math.max(v.videoWidth,v.videoHeight));
+  cv.width=Math.round(v.videoWidth*r);cv.height=Math.round(v.videoHeight*r);
+  const x=cv.getContext("2d");
+  x.drawImage(v,0,0,cv.width,cv.height);   // gửi hình GỐC (không lật gương) - giống webcam laptop; chỉ phần xem trước trên màn hình là lật
+  const t=performance.now()/1000;
+  cv.toBlob(b=>{if(!b||ws.readyState!==1)return;b.arrayBuffer().then(buf=>{
+    const out=new Uint8Array(8+buf.byteLength);new DataView(out.buffer).setFloat64(0,t,true);out.set(new Uint8Array(buf),8);
+    if(ws.readyState===1)ws.send(out.buffer)})},"image/jpeg",0.6)}
+function stop(){if(timer){clearInterval(timer);timer=null}if(stream){stream.getTracks().forEach(t=>t.stop());stream=null}if(ws){try{ws.close()}catch(e){}}$("bStart").textContent="📷 Bật camera và bắt đầu"}
+$("bStart").onclick=async()=>{
+  if(stream){stop();return}
+  if(window.speechSynthesis)speechSynthesis.getVoices();
+  if(!await startCam())return;
+  connect();timer=setInterval(loop,1000/30);
+  $("bStart").textContent="⏹ Tắt camera";$("bFlip").style.display="inline-block"};
+$("bFlip").onclick=async()=>{facing=facing==="user"?"environment":"user";await startCam()};
+$("bClear").onclick=()=>{if(ws&&ws.readyState===1)ws.send(JSON.stringify({cmd:"clear"}));$("big").textContent="…";lastSentence=""};
+$("bPause").onclick=()=>{if(ws&&ws.readyState===1)ws.send(JSON.stringify({cmd:"pause"}))};
+$("bSpeak").onclick=()=>speak(lastSentence);
+$("bAuto").onclick=()=>{auto=!auto;$("bAuto").textContent="Tự đọc: "+(auto?"BẬT":"TẮT")};
+$("typed").addEventListener("keydown",e=>{if(e.key==="Enter"){showAvatar($("typed").value)}});
+
+// Mic nghe liên tục (Web Speech API của Chrome; cần Internet)
+let rec=null,micOn=false;
+$("bMic").onclick=()=>{
+  const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+  if(!SR){$("micStat").textContent="Trình duyệt này không hỗ trợ nghe giọng nói. Hãy dùng Chrome.";return}
+  if(micOn){micOn=false;rec&&rec.stop();$("bMic").textContent="🎙️ Bật mic nghe người nói (tiếng Việt)";$("micStat").textContent="Đã tắt mic.";return}
+  rec=new SR();rec.lang="vi-VN";rec.continuous=true;rec.interimResults=true;
+  rec.onresult=e=>{
+    for(let i=e.resultIndex;i<e.results.length;i++){
+      const r=e.results[i],t=r[0].transcript.trim();
+      if(r.isFinal){const el=$("chat").querySelector(".int");if(el)el.remove();if(t){addMsg("voice","🗣️ "+t);showAvatar(t)}}
+      else addMsg("voice","🗣️ "+t,true)}};
+  rec.onerror=e=>{$("micStat").textContent="Mic báo lỗi: "+e.error+(e.error==="not-allowed"?" (hãy cho phép micro cho trang này)":"")};
+  rec.onend=()=>{if(micOn)try{rec.start()}catch(e){}};
+  micOn=true;rec.start();$("bMic").textContent="⏹ Tắt mic";$("micStat").textContent="Đang nghe… cứ nói tự nhiên."};
+</script>
+</body>
+</html>

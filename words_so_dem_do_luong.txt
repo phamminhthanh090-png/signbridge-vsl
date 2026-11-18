@@ -1,0 +1,200 @@
+chào
+tạm biệt
+xin lỗi
+không có chi
+chúc mừng
+bạn
+ai
+bao nhiêu
+bao giờ
+vì sao
+thế nào
+là gì
+có … không
+không có
+không cần
+không hiểu
+không muốn
+hiểu
+muốn
+giúp đỡ
+đợi
+gọi
+hỏi
+trả lời
+nói chuyện
+bình thường
+bình an
+quan trọng
+cần không
+còn bạn
+tên là gì
+mấy giờ
+đúng không
+đẹp không
+tôi yêu bạn
+0 (số không)
+1
+1 000 000 (một triệu)
+1 000 000 000 (một tỉ)
+10
+10 000 (mười nghìn)
+100
+1000 (một nghìn)
+11
+12
+2
+2 5 (Toán học)
+2 6 (Toán học)
+23
+3
+33
+4
+40
+5
+5 3 (Toán học)
+5000 (năm nghìn)
+6
+7
+8
+80
+9
+90
+Cao Bằng
+Ma Cao
+ba là
+bé hơn
+bốn là
+bớt
+bớt đi
+cao (người)
+cao (nhà)
+cao (núi)
+cao (vật)
+cao nguyên
+cao quý
+cao thấp
+cao tầng
+cao tốc
+cao độ
+chia ba
+chia đôi
+chiênrán (1)(2)
+chiều cao
+chiều dài
+chiều rộng
+chuyển đổi số đo
+chúng tôi (2 người) (đại từ)
+chúng tôi (3 người) (đại từ)
+chúng tôi (4 người) (đại từ)
+chúng tôi (5 người) (đại từ)
+chục
+chục nghìn
+chục triệu
+các bạn (2 người)
+diện tích
+diện tích toàn phần
+diện tích xung quanh
+dung tích
+duy nhất
+dài
+dài hơn
+dài hạn
+dài nhất
+giá trị phần trăm
+giảm
+gấp ba
+gấp đôi
+hai là
+hàng chục
+hàng chục nghìn
+hàng chục triệu
+hàng nghìn
+hàng triệu
+hàng trăm
+hàng trăm nghìn
+héc-ta (ha)
+héc-tô-gam (hg)
+héc-tô-mét (hm)
+héc-tô-mét vuông (hm2)
+họ (2 người) (đại từ)
+khối lượng
+ki-lô-gam
+ki-lô-mét (km)
+ki-lô-mét vuông (km2)
+lễ Halloween 3110
+lớn hơn 1 (Toán học)
+lớn hơn 2 (Toán học)
+mi-li-mét (mm)
+mét (m)
+mét khối (m3)
+mét vuông (m2)
+mặt dài
+một cặp
+một là
+một tiếng
+một tiết học
+một ít một chút
+một đôi
+mở rộng
+ngày Giải phóng miền Nam 304
+ngày Ngôn ngữ kí hiệu Quốc tế 239
+ngày Người khuyết tật Thế giới 312
+ngày Người khuyết tật Việt Nam 184
+ngày Phụ nữ Việt Nam 2010
+ngày Quốc tế phụ nữ 83
+ngày gia đình Việt Nam 286
+ngày giải phóng thủ đô 1010
+ngày giỗ tổ Hùng Vương (âm lịch 103)
+ngày thương bình liệt sĩ 277
+ngắn
+ngắn nhất
+nhiều hơn
+nhiều vô cùng
+nhiệt độ
+nhảy cao
+nhẹ hơn
+nhỏ hơn
+núi cao
+núi thấp
+năm là
+nặng hơn
+phần trăm
+rưỡi
+rộng lớn
+rộng rãi
+số đo
+thấp hơn
+thấp nhất
+thống nhất
+thống nhất đất nước
+thở dài
+triệu phú
+trường PTCS (cấp 2)
+trường THPT ( cấp 3)
+tung tăng
+tóc dài
+tóc ngắn
+tỉ lệ
+tỉ mỉ
+tỉ số
+tỉ số phần trăm
+vận tốc
+về 2 (Miền Bắc)
+về 3 (đi về)
+về 4 (từ nơi khác về)
+về 5 (về nhà)
+xăng-ti-mét (cm)
+xăng-ti-mét-khối (cm3)
+xăng-ti-mét-vuông (cm2)
+ít
+ít hơn
+ít nhất
+ăn ít
+đôicặp
+đường cao
+đề-ca-mét (dam)
+đề-ca-mét vuông (dam2)
+đề-xi-mét (dm)
+đề-xi-mét khối (dm3)
+đề-xi-mét vuông (dm2)
